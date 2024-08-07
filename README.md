@@ -12,6 +12,7 @@ syntax highlighter - see if we need it
 modal 
 react router DOM
 react use
+axios
 
 
 ## Routes/pages - what pages
