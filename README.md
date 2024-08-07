@@ -14,17 +14,46 @@ react router DOM
 react use
 
 
-## Routes - what pages
-- need to work out my route
-templatePage 
-dashboard - homepage
+## Routes/pages - what pages
+- dashboard will be home page
+- login page - need logic so that if you aren't logged in, it takes you to login page
+- operator
+- asset
+- client
+- allocation 
+- user
 
 ## Contexts
 
+- authentication 
+
 ## Data
+- login
+- opeartor
+- asset 
+- clinet
+- allocation 
+- user
 
 ## function
-does not return a html 
+
 
 ## component  
-header
+- header
+- change of button clour when you hover over it
+- change of colour when you are on the page 
+- dark/light mode - stretch goal
+- logo taking back to dash baord
+- user profile lead to user profile
+
+## style (CSS file)
+- header
+- theme colour
+- different size
+- theme page
+- each page
+
+## Development testing
+
+
+
