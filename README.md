@@ -55,5 +55,25 @@ react use
 
 ## Development testing
 
+One of the first thing I made for this application was the routes. Once the routes was set, I tested to make sure it was working: 
 
+Dashboard Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard testing.png>)
 
+Allocation Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page Testing.png>)
+
+Asset Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Asset Page testing.png>)
+
+Client Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page testing.png>)
+
+Operator Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Opeartor page testing.png>)
+
+User Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/User Page Testing.png>)
+
+Login Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page testing.png>)
