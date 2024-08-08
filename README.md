@@ -12,6 +12,7 @@ syntax highlighter - see if we need it
 modal 
 react router DOM
 react use
+axios
 
 
 ## Routes/pages - what pages
@@ -55,5 +56,44 @@ react use
 
 ## Development testing
 
+One of the first thing I made for this application was the routes. Once the routes was set, I tested to make sure it was working: 
 
+Dashboard Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard testing.png>)
+
+Allocation Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page Testing.png>)
+
+Asset Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Asset Page testing.png>)
+
+
+Having issues with creating asset
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/issues with Allocation.png>)
+
+Client Page
+Test to see the route is working
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page testing.png>)
+
+Testing Client API and CRUD function working
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/client page.png>)
+
+Adding new client
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/adding new client.png>)
+
+deleting client
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/deleting client.png>)
+
+Editing client
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/editing client.png>)
+
+
+Operator Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Opeartor page testing.png>)
+
+User Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/User Page Testing.png>)
+
+Login Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page testing.png>)
 
