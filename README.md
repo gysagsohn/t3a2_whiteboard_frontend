@@ -67,8 +67,26 @@ Allocation Page
 Asset Page
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Asset Page testing.png>)
 
+
+Having issues with creating asset
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/issues with Allocation.png>)
+
 Client Page
+Test to see the route is working
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page testing.png>)
+
+Testing Client API and CRUD function working
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/client page.png>)
+
+Adding new client
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/adding new client.png>)
+
+deleting client
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/deleting client.png>)
+
+Editing client
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/editing client.png>)
+
 
 Operator Page
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Opeartor page testing.png>)
@@ -78,3 +96,4 @@ User Page
 
 Login Page
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page testing.png>)
+
