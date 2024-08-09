@@ -4,7 +4,7 @@ import axiosInstance from './axiosInstance';
 export const fetchAssets = async () => {
     try {
         const response = await axiosInstance.get('/assets');
-        return response.data;
+        return response.data.result;  // Access the result part of the response
     } catch (error) {
         console.error('Error fetching assets:', error);
         throw error;

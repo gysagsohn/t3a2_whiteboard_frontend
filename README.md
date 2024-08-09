@@ -80,7 +80,7 @@ Testing Client API and CRUD function working
 Adding new client
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/adding new client.png>)
 
-deleting client
+Deleting client
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/deleting client.png>)
 
 Editing client
