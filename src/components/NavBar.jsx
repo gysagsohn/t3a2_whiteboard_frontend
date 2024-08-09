@@ -13,7 +13,7 @@ export default function NavBar(){
                 <NavLink to={"/operator"} > Operator </NavLink>
                 <NavLink to={"/asset"} > Asset </NavLink>
                 <NavLink to={"/client"} > Client </NavLink>
-                <NavLink to={"/allocation"} > Dashboard </NavLink>
+                <NavLink to={"/allocation"} > Allocation </NavLink>
                 <NavLink to={"/user"} > User </NavLink>
                 {/* To change to user icon later */}
                 <NavLink to={"/login"} > Login </NavLink>

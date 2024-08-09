@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAssets, createAsset, updateAsset, deleteAsset } from '../utils/assetAPI';
+import axiosInstance from '../utils/axiosInstance';
 
 export default function AssetPage() {
     const [assets, setAssets] = useState([]);
+    const [assetTypeOptions, setAssetTypeOptions] = useState([]);
+    const [licenceClassOptions, setLicenceClassOptions] = useState([]);
     const [newAsset, setNewAsset] = useState({
         assetnumber: '',
         assetType: [],
@@ -10,46 +13,62 @@ export default function AssetPage() {
         licenceClass: []
     });
     const [selectedAsset, setSelectedAsset] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
 
+    // Fetch assets and options for asset types and licence classes on component mount
     useEffect(() => {
-        loadAssets();
-    }, []);
-
-    const loadAssets = async () => {
-        try {
-            const data = await fetchAssets();
-            if (data && data.result) {
-                setAssets(data.result);
-            } else {
-                setAssets([]);
-                console.error('No assets data found');
+        const loadAssets = async () => {
+            try {
+                const assetsData = await fetchAssets();
+                setAssets(assetsData || []);
+            } catch (error) {
+                console.error('Failed to load assets', error);
             }
-        } catch (error) {
-            console.error('Failed to load assets', error);
-        }
-    };
+        };
+
+        const loadAssetTypeOptions = async () => {
+            try {
+                const response = await axiosInstance.get('/assets/asset-types');
+                setAssetTypeOptions(response.data.assetTypes || []);
+            } catch (error) {
+                console.error('Failed to load asset type options', error);
+            }
+        };
+
+        const loadLicenceClassOptions = async () => {
+            try {
+                const response = await axiosInstance.get('/assets/licence-classes');
+                setLicenceClassOptions(response.data.licenceClasses || []);
+            } catch (error) {
+                console.error('Failed to load licence class options', error);
+            }
+        };
+
+        loadAssets();
+        loadAssetTypeOptions();
+        loadLicenceClassOptions();
+    }, []);
 
     const handleCreateAsset = async () => {
         try {
             const createdAsset = await createAsset(newAsset);
-            setAssets([...assets, createdAsset]);
+            setAssets([...assets, createdAsset.result]);
             setNewAsset({ assetnumber: '', assetType: [], rego: '', licenceClass: [] });
         } catch (error) {
             console.error('Failed to create asset', error);
         }
     };
 
-    const handleUpdateAsset = async (id) => {
-        try {
-            const updatedAsset = await updateAsset(id, {
-                ...selectedAsset,
-                assetType: selectedAsset.assetType.split(', '),
-                licenceClass: selectedAsset.licenceClass.split(', ')
-            });
-            setAssets(assets.map(a => a._id === id ? updatedAsset : a));
-            setSelectedAsset(null);
-        } catch (error) {
-            console.error('Failed to update asset', error);
+    const handleUpdateAsset = async () => {
+        if (selectedAsset) {
+            try {
+                const updatedAsset = await updateAsset(selectedAsset._id, selectedAsset);
+                setAssets(assets.map(a => a._id === updatedAsset.result._id ? updatedAsset.result : a));
+                setSelectedAsset(null);
+                setIsEditing(false);
+            } catch (error) {
+                console.error('Failed to update asset', error);
+            }
         }
     };
 
@@ -62,50 +81,87 @@ export default function AssetPage() {
         }
     };
 
-    const handleInputChange = (e, setFunction, field) => {
-        if (field === 'assetType' || field === 'licenceClass') {
-            const values = e.target.value.split(',').map(item => item.trim());
-            setFunction(prev => ({ ...prev, [field]: values }));
-        } else {
-            setFunction(prev => ({ ...prev, [field]: e.target.value }));
-        }
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewAsset(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSelectionChange = (type, field) => {
+        setNewAsset(prev => ({
+            ...prev,
+            [field]: [type]
+        }));
+    };
+
+    const handleAssetSelection = (asset) => {
+        setSelectedAsset(asset);
+        setIsEditing(true);
     };
 
     return (
         <div>
             <h1>Asset Page</h1>
             <ul>
-                {assets.map(a => (
-                    <li key={a._id}>
-                        {a.assetnumber} - {a.assetType.join(', ')} - {a.rego} - {a.licenceClass.join(', ')}
-                        <button onClick={() => handleDeleteAsset(a._id)}>Delete</button>
-                        <button onClick={() => setSelectedAsset({
-                            ...a,
-                            assetType: a.assetType.join(', '),
-                            licenceClass: a.licenceClass.join(', ')
-                        })}>Edit</button>
+                {assets.map(asset => (
+                    <li key={asset._id}>
+                        {asset.assetnumber} - {Array.isArray(asset.assetType) ? asset.assetType.join(', ') : ''} - {asset.rego} - {Array.isArray(asset.licenceClass) ? asset.licenceClass.join(', ') : ''}
+                        <button onClick={() => handleDeleteAsset(asset._id)}>Delete</button>
+                        <button onClick={() => handleAssetSelection(asset)}>Edit</button>
                     </li>
                 ))}
             </ul>
             <div>
-                <h2>Create Asset</h2>
-                <input type="text" placeholder="Asset Number" value={newAsset.assetnumber} onChange={(e) => handleInputChange(e, setNewAsset, 'assetnumber')} />
-                <input type="text" placeholder="Asset Type" value={newAsset.assetType.join(', ')} onChange={(e) => handleInputChange(e, setNewAsset, 'assetType')} />
-                <input type="text" placeholder="Rego" value={newAsset.rego} onChange={(e) => handleInputChange(e, setNewAsset, 'rego')} />
-                <input type="text" placeholder="Licence Class" value={newAsset.licenceClass.join(', ')} onChange={(e) => handleInputChange(e, setNewAsset, 'licenceClass')} />
-                <button onClick={handleCreateAsset}>Create</button>
-            </div>
-            {selectedAsset && (
+                <h2>{isEditing ? 'Edit Asset' : 'Create Asset'}</h2>
+                <input
+                    type="text"
+                    name="assetnumber"
+                    value={isEditing ? selectedAsset.assetnumber : newAsset.assetnumber}
+                    onChange={handleInputChange}
+                    placeholder="Asset Number"
+                />
+                <input
+                    type="text"
+                    name="rego"
+                    value={isEditing ? selectedAsset.rego : newAsset.rego}
+                    onChange={handleInputChange}
+                    placeholder="Rego"
+                />
                 <div>
-                    <h2>Edit Asset</h2>
-                    <input type="text" placeholder="Asset Number" value={selectedAsset.assetnumber} onChange={(e) => handleInputChange(e, setSelectedAsset, 'assetnumber')} />
-                    <input type="text" placeholder="Asset Type" value={selectedAsset.assetType} onChange={(e) => handleInputChange(e, setSelectedAsset, 'assetType')} />
-                    <input type="text" placeholder="Rego" value={selectedAsset.rego} onChange={(e) => handleInputChange(e, setSelectedAsset, 'rego')} />
-                    <input type="text" placeholder="Licence Class" value={selectedAsset.licenceClass} onChange={(e) => handleInputChange(e, setSelectedAsset, 'licenceClass')} />
-                    <button onClick={() => handleUpdateAsset(selectedAsset._id)}>Update</button>
-                    <button onClick={() => setSelectedAsset(null)}>Cancel</button>
+                    <p>Select Asset Type:</p>
+                    {assetTypeOptions.map(type => (
+                        <button
+                            key={type}
+                            onClick={() => handleSelectionChange(type, 'assetType')}
+                        >
+                            {type}
+                        </button>
+                    ))}
                 </div>
-            )}
+                <div>
+                    <p>Select Licence Class:</p>
+                    {licenceClassOptions.map(type => (
+                        <button
+                            key={type}
+                            onClick={() => handleSelectionChange(type, 'licenceClass')}
+                        >
+                            {type}
+                        </button>
+                    ))}
+                </div>
+                <button onClick={isEditing ? handleUpdateAsset : handleCreateAsset}>
+                    {isEditing ? 'Update' : 'Create'}
+                </button>
+                {isEditing && (
+                    <button
+                        onClick={() => {
+                            setSelectedAsset(null);
+                            setIsEditing(false);
+                        }}
+                    >
+                        Cancel
+                    </button>
+                )}
+            </div>
         </div>
     );
 }
