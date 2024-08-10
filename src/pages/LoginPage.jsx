@@ -20,10 +20,8 @@ export default function LoginPage() {
                 useremail: email,
                 password: password
             });
-            // Store the JWT token in localStorage
-            localStorage.setItem('jwtToken', response.data.token);
-            // Navigate to the main page after login
-            navigate('/');
+            localStorage.setItem('jwtToken', response.data.token);  // Save JWT token to local storage
+            navigate('/dashboard');  // Navigate to Dashboard after login
         } catch (error) {
             console.error('Login failed:', error.response?.data?.message || error.message);
         }
@@ -31,16 +29,14 @@ export default function LoginPage() {
 
     const handleSignup = async () => {
         try {
-            const response = await axiosInstance.post('/users', {
+            const response = await axiosInstance.post('/users/signup', {
                 useremail: email,
                 password: password,
                 username: username,
                 usercompany: usercompany
             });
-            // Store the JWT token in localStorage
-            localStorage.setItem('jwtToken', response.data.token);
-            // Navigate to the main page after signup
-            navigate('/');
+            localStorage.setItem('jwtToken', response.data.token);  // Save JWT token to local storage
+            navigate('/dashboard');  // Navigate to Dashboard after signup
         } catch (error) {
             console.error('Signup failed:', error.response?.data?.message || error.message);
         }
@@ -52,7 +48,6 @@ export default function LoginPage() {
             <button onClick={() => setIsLoginModalOpen(true)}>Login</button>
             <button onClick={() => setIsSignupModalOpen(true)}>Sign Up</button>
 
-            {/* Login Modal */}
             <Modal
                 isOpen={isLoginModalOpen}
                 onRequestClose={() => setIsLoginModalOpen(false)}
@@ -75,7 +70,6 @@ export default function LoginPage() {
                 <button onClick={() => setIsLoginModalOpen(false)}>Close</button>
             </Modal>
 
-            {/* Signup Modal */}
             <Modal
                 isOpen={isSignupModalOpen}
                 onRequestClose={() => setIsSignupModalOpen(false)}
