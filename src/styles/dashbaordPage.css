@@ -1,0 +1,62 @@
+@import './colors.css';
+@import './buttons.css';
+
+
+.dashboard-container {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 20px;
+ padding: 20px;
+ background-color: var(--off-white);
+ justify-content: space-between;
+}
+
+
+.dashboard-section {
+ background-color: var(--light-orange);
+ border-radius: 8px;
+ color: var(--white);
+ flex: 1 1 calc(50% - 20px);
+ padding: 20px;
+ display: flex;
+ flex-direction: column;
+ max-height: 300px;
+ overflow-y: auto;
+}
+
+
+.dashboard-section h2 {
+ margin-top: 0;
+}
+
+
+.dashboard-list {
+ list-style: none;
+ padding: 0;
+ margin: 0;
+ flex-grow: 1;
+ overflow-y: auto;
+}
+
+
+.dashboard-list li {
+ margin-bottom: 10px;
+ line-height: 1.5;
+}
+
+
+button {
+ margin-top: 10px;
+}
+
+
+@media (max-width: 768px) {
+ .dashboard-container {
+   flex-direction: column;
+ }
+
+
+ .dashboard-section {
+   flex: 1 1 100%;
+ }
+}

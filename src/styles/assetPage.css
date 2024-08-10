@@ -1,0 +1,97 @@
+@import './colors.css';
+@import './buttons.css';
+
+.asset-container {
+   padding: 20px;
+   background-color: var(--off-white);
+}
+
+.asset-section {
+   background-color: var(--light-orange);
+   border-radius: 8px;
+   color: var(--white);
+   padding: 20px;
+   margin-bottom: 20px;
+}
+
+.asset-list {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+   max-height: 300px;
+   overflow-y: auto;
+}
+
+.asset-list li {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 10px;
+   line-height: 1.5;
+   flex-wrap: wrap; /* Ensure items wrap properly */
+}
+
+.asset-actions {
+   display: flex;
+   gap: 10px;
+}
+
+.asset-form {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.asset-selection {
+   display: flex;
+   gap: 10px;
+   margin-top: 10px;
+}
+
+.asset-selection p {
+   margin: 0;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+   .asset-list li {
+       flex-direction: column; 
+       align-items: flex-start; 
+   }
+
+   .asset-actions {
+       width: 100%;
+       display: flex;
+       flex-direction: column;
+       gap: 5px;
+   }
+
+
+   .asset-form {
+       gap: 5px;
+   }
+
+   .asset-selection {
+       flex-direction: column; 
+       gap: 5px;
+   }
+
+   .asset-form button {
+       width: 100%; 
+   }
+}
+
+@media (max-width: 480px) {
+   .asset-list li {
+       font-size: 14px; 
+   }
+
+   .asset-actions button, 
+   .asset-form button {
+       width: 100%; 
+   }
+
+   .asset-selection button {
+       width: 100%; 
+   }
+}

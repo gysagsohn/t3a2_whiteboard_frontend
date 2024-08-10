@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchOperators, createOperator, updateOperator, deleteOperator } from '../utils/operatorAPI';
+import '../styles/operatorPage.css'; // Import the new CSS file
 
 export default function OperatorPage() {
     const [operators, setOperators] = useState([]);
@@ -29,10 +30,10 @@ export default function OperatorPage() {
 
     const handleToggleDay = (day) => {
         setCurrentOperator(prev => {
-            const newDays = prev.availableDays.includes(day) ? 
-                prev.availableDays.filter(d => d !== day) : 
+            const newDays = prev.availableDays.includes(day) ?
+                prev.availableDays.filter(d => d !== day) :
                 [...prev.availableDays, day];
-            return {...prev, availableDays: newDays};
+            return { ...prev, availableDays: newDays };
         });
     };
 
@@ -53,50 +54,64 @@ export default function OperatorPage() {
     };
 
     return (
-        <div>
+        <div className="operator-container">
             <h1>Operator Management</h1>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    name="operatorName" 
-                    value={currentOperator.operatorName} 
-                    onChange={e => setCurrentOperator(prev => ({ ...prev, operatorName: e.target.value }))}
-                    placeholder="Operator Name"
-                />
-                <div>
-                    {['C', 'HR', 'HC'].map(licence => (
-                        <button 
-                            type="button" 
-                            key={licence} 
-                            onClick={() => handleSelectLicenceClass(licence)}
-                            className={currentOperator.licenceClass === licence ? 'selected' : ''}
-                            style={{ background: currentOperator.licenceClass === licence ? 'lightblue' : 'lightgrey' }}>
-                            {licence}
-                        </button>
+            <section className="operator-section">
+                <h2>Current Operators</h2>
+                <ul className="operator-list">
+                    {operators.map(op => (
+                        <li key={op._id}>
+                            {op.operatorName} - {op.licenceClass} - Days: {op.availableDays.join(', ')}
+                            <div className="operator-actions">
+                                <button onClick={() => { setCurrentOperator(op); setIsEditing(true); }}>Edit</button>
+                                <button onClick={() => deleteOperator(op._id).then(() => setOperators(operators.filter(o => o._id !== op._id)))}>Delete</button>
+                            </div>
+                        </li>
                     ))}
-                </div>
-                <div>
-                    {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map(day => (
-                        <button 
-                            type="button" 
-                            key={day} 
-                            onClick={() => handleToggleDay(day)}
-                            className={currentOperator.availableDays.includes(day) ? 'selected' : ''}
-                            style={{ background: currentOperator.availableDays.includes(day) ? 'lightblue' : 'lightgrey' }}>
-                            {day}
-                        </button>
-                    ))}
-                </div>
-                <button type="submit">{isEditing ? 'Update' : 'Create'}</button>
-            </form>
-            <ul>
-                {operators.map(op => (
-                    <li key={op._id}>
-                        {op.operatorName} - {op.licenceClass} - Days: {op.availableDays.join(', ')}
-                        <button onClick={() => { setCurrentOperator(op); setIsEditing(true); }}>Edit</button>
-                        <button onClick={() => deleteOperator(op._id).then(() => setOperators(operators.filter(o => o._id !== op._id)))}>Delete</button>
-                    </li>
-                ))}
-            </ul>
+                </ul>
+            </section>
+
+            <section className="operator-section">
+                <h2>{isEditing ? 'Edit Operator' : 'Create Operator'}</h2>
+                <form className="operator-form" onSubmit={handleSubmit}>
+                    <input
+                        name="operatorName"
+                        value={currentOperator.operatorName}
+                        onChange={e => setCurrentOperator(prev => ({ ...prev, operatorName: e.target.value }))}
+                        placeholder="Operator Name"
+                    />
+                    <div className="operator-selection">
+                        <p>Select Licence Class:</p>
+                        {['C', 'HR', 'HC'].map(licence => (
+                            <button
+                                type="button"
+                                key={licence}
+                                onClick={() => handleSelectLicenceClass(licence)}
+                                className={currentOperator.licenceClass === licence ? 'selected' : ''}
+                            >
+                                {licence}
+                            </button>
+                        ))}
+                    </div>
+                    <div className="operator-selection">
+                        <p>Select Available Days:</p>
+                        {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map(day => (
+                            <button
+                                type="button"
+                                key={day}
+                                onClick={() => handleToggleDay(day)}
+                                className={currentOperator.availableDays.includes(day) ? 'selected' : ''}
+                            >
+                                {day}
+                            </button>
+                        ))}
+                    </div>
+                    <button type="submit">{isEditing ? 'Update' : 'Create'}</button>
+                    {isEditing && (
+                        <button onClick={resetForm}>Cancel</button>
+                    )}
+                </form>
+            </section>
         </div>
     );
 }

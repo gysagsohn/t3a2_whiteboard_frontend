@@ -1,0 +1,48 @@
+@import './colors.css';
+@import './buttons.css';
+
+.contact-container {
+    padding: 20px;
+    background-color: var(--off-white);
+    text-align: center;
+    color: var(--obsidian-black);
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.contact-links a {
+    text-decoration: none;
+    color: var(--cyan-blue);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.contact-links a:hover {
+    color: var(--light-orange);
+}
+
+.contact-icon {
+    margin-right: 8px;
+    font-size: 2rem;
+}
+
+.note {
+    margin-top: 40px;
+    font-style: italic;
+    color: var(--obsidian-black);
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .contact-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

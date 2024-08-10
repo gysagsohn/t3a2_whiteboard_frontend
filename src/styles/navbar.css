@@ -1,0 +1,114 @@
+@import './colors.css';
+
+/* Container for navbar and content */
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Navbar container for desktop/laptop screens */
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: var(--cyan-blue);
+  color: var(--white);
+  position: fixed;
+  height: 100vh;
+  transition: all 0.3s ease;
+}
+
+.logo {
+  padding: 20px;
+  text-align: center;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.navbar a {
+  color: var(--white);
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a.active {
+  background-color: var(--light-orange);
+}
+
+.navbar a:hover {
+  background-color: var(--light-orange);
+}
+
+button {
+  margin-top: auto;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--light-orange);
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  text-align: center;
+}
+
+button:hover {
+  background-color: var(--obsidian-black);
+}
+
+/* Content area styling */
+.content-container {
+  margin-left: 200px;
+  padding: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: var(--off-white);
+  transition: margin-left 0.3s ease;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    height: auto; 
+  }
+
+  .navbar-container {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    position: static; 
+  }
+
+  .navbar {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .content-container {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    flex-direction: column;
+    height: auto;
+    position: static; 
+    width: 100%;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+}

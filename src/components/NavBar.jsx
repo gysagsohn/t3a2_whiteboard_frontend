@@ -1,37 +1,44 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import axiosInstance from '../utils/axiosInstance';
+import '../styles/navbar.css';
 
 export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const handleLogout = async () => {
-        try {
-            await axiosInstance.post('/users/logout');
-            setIsAuthenticated(false);
-            navigate('/login');
-        } catch (error) {
-            console.error('Logout failed:', error);
-        }
-    };
+  const handleLogout = async () => {
+      try {
+          await axiosInstance.post('/users/logout');
+          setIsAuthenticated(false);
+          navigate('/login');
+      } catch (error) {
+          console.error('Logout failed:', error);
+      }
+  };
 
-    return (
-        <header>
-            <div id="logo">
-                WhiteBoard Scheduler
-            </div>
-            <nav id="navbar">
-                <NavLink to={"/"}> Dashboard </NavLink>
-                <NavLink to={"/operator"}> Operator </NavLink>
-                <NavLink to={"/asset"}> Asset </NavLink>
-                <NavLink to={"/client"}> Client </NavLink>
-                <NavLink to={"/allocation"}> Allocation </NavLink>
-                <NavLink to={"/user"}> User </NavLink>
-                {isAuthenticated ? (
-                    <button onClick={handleLogout}>Logout</button>
-                ) : (
-                    <NavLink to={"/login"}>Login</NavLink>
-                )}
-            </nav>
-        </header>
-    );
+  // Do not render the navbar on the login page
+  if (location.pathname === '/login') {
+      return null;
+  }
+
+  return (
+      <header className="navbar-container">
+          <div className="logo">
+              <NavLink to="/">
+                  <img src="/logo.png" alt="Company Logo" />
+              </NavLink>
+          </div>
+          <nav className="navbar">
+              <NavLink to="/asset" className={({ isActive }) => isActive ? 'active' : ''}>Asset</NavLink>
+              <NavLink to="/operator" className={({ isActive }) => isActive ? 'active' : ''}>Operator</NavLink>
+              <NavLink to="/client" className={({ isActive }) => isActive ? 'active' : ''}>Client</NavLink>
+              <NavLink to="/allocation" className={({ isActive }) => isActive ? 'active' : ''}>Allocation</NavLink>
+              <NavLink to="/user" className={({ isActive }) => isActive ? 'active' : ''}>User</NavLink>
+              <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''}>Contact</NavLink>
+              {isAuthenticated && (
+                  <button onClick={handleLogout}>Logout</button>
+              )}
+          </nav>
+      </header>
+  );
 }

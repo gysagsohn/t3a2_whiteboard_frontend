@@ -1,0 +1,81 @@
+@import './colors.css';
+@import './buttons.css';
+
+.user-container {
+  padding: 20px;
+  background-color: var(--off-white);
+}
+
+.user-section {
+  background-color: var(--light-orange);
+  border-radius: 8px;
+  color: var(--white);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.user-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  flex-wrap: wrap; /* Ensure items wrap properly */
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-form button {
+  margin-top: 10px;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .user-list li {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .user-actions {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+  }
+
+  .user-form {
+      gap: 5px;
+  }
+
+  .user-form button {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-list li {
+      font-size: 14px;
+  }
+
+  .user-actions button,
+  .user-form button {
+      width: 100%;
+  }
+}

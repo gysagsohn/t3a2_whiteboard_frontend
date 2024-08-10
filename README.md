@@ -4,6 +4,11 @@ This is the front end for my T3A2 MERN full stack webapplication.
 Backend repository can be found at:
 https://github.com/gysagsohn/T3A2B_whiteboardscheduler_backend/
 
+Website can be found at:
+https://whiteboardschedulercom.netlify.app/
+
+https://whiteboardscheduler.com/ - I have pointed the DNS just need to see if it changes after 24 hours
+
 I have added another file to this repository called T3A2A, that contains all of the Part A of this assignment and the planning for it.
 
 ## Packages
@@ -14,6 +19,7 @@ react router DOM
 react use
 axios
 cors
+react-icons - for contact page
 
 
 ## Routes/pages - what pages
@@ -183,3 +189,8 @@ After few rounds of code adjustment, login/sign up function is working:
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/new user sign up 1.png>)
 
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/Screenshot 2024-08-10 at 10.26.26 AM.png>)
+
+### Hosting 
+Checked URL is working and website is working
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Hosting working.png>)
+

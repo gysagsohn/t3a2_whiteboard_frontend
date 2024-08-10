@@ -1,140 +1,132 @@
 import React, { useEffect, useState } from 'react';
-import { fetchUsers, createUser, updateUser, deleteUser } from '../utils/userAPI';
-import { useNavigate } from 'react-router-dom';
+import { fetchUsers, updateUser, deleteUser } from '../utils/userAPI';
+import '../styles/userPage.css';
 
 export default function UserPage() {
-    // State to manage the list of users fetched from the API
-    const [users, setUsers] = useState([]);
+   const [users, setUsers] = useState([]);
+   const [currentUser, setCurrentUser] = useState({
+       useremail: '',
+       password: '',
+       username: '',
+       usercompany: ''
+   });
+   const [selectedUser, setSelectedUser] = useState(null);
+   const [isEditing, setIsEditing] = useState(false);
 
-    // State to manage the current user being created or edited
-    const [currentUser, setCurrentUser] = useState({
-        useremail: '',
-        password: '',
-        username: '',
-        usercompany: ''
-    });
+   useEffect(() => {
+       loadUsers();
+   }, []);
 
-    // State to track if the form is in editing mode or creating mode
-    const [isEditing, setIsEditing] = useState(false);
+   const loadUsers = async () => {
+       try {
+           const usersData = await fetchUsers();
+           setUsers(usersData || []);
+       } catch (error) {
+           console.error('Failed to load users:', error);
+       }
+   };
 
-    // Hook from react-router-dom to programmatically navigate the user to different routes
-    const navigate = useNavigate();
+   const handleUpdateUser = async () => {
+       if (selectedUser) {
+           try {
+               const updatedUser = await updateUser(selectedUser._id, {
+                   useremail: selectedUser.useremail,
+                   username: selectedUser.username,
+                   usercompany: selectedUser.usercompany
+               });
+               setUsers(users.map(u => u._id === updatedUser._id ? updatedUser : u));
+               resetForm();
+           } catch (error) {
+               console.error('Failed to update user', error);
+           }
+       }
+   };
 
-    // useEffect hook to load users when the component mounts
-    useEffect(() => {
-        loadUsers();
-    }, []);
+   const handleDeleteUser = async (id) => {
+       try {
+           await deleteUser(id);
+           setUsers(users.filter(u => u._id !== id));
+       } catch (error) {
+           console.error('Failed to delete user', error);
+       }
+   };
 
-    // Function to load users from the backend API
-    const loadUsers = async () => {
-        try {
-            const usersData = await fetchUsers();
-            setUsers(usersData); // Set the fetched users in the state
-        } catch (error) {
-            console.error('Failed to load users:', error);
-        }
-    };
+   const handleChange = (e) => {
+       const { name, value } = e.target;
+       if (isEditing && selectedUser) {
+           setSelectedUser(prev => ({ ...prev, [name]: value }));
+       } else {
+           setCurrentUser(prev => ({ ...prev, [name]: value }));
+       }
+   };
 
-    // Function to handle form submission (either creating or updating a user)
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            // Determine whether to create or update the user based on isEditing state
-            const response = isEditing ? await updateUser(currentUser._id, {
-                // Update the user without changing the password unless specified
-                useremail: currentUser.useremail,
-                username: currentUser.username,
-                usercompany: currentUser.usercompany
-            }) : await createUser(currentUser);
+   const handleUserSelection = (user) => {
+       setSelectedUser(user);
+       setIsEditing(true);
+   };
 
-            // Update the users list based on whether we created or updated a user
-            setUsers(isEditing ? users.map(user => user._id === response._id ? response : user) : [...users, response]);
+   const resetForm = () => {
+       setCurrentUser({
+           useremail: '',
+           password: '',
+           username: '',
+           usercompany: ''
+       });
+       setSelectedUser(null);
+       setIsEditing(false);
+   };
 
-            // Reset the form after submission
-            resetForm();
-        } catch (error) {
-            console.error('Failed to submit user:', error);
-        }
-    };
+   return (
+       <div className="user-container">
+           <section className="user-section">
+               <h2>Current Users</h2>
+               <ul className="user-list">
+                   {users.map(user => (
+                       <li key={user._id}>
+                           {user.username} - {user.usercompany}
+                           <div className="user-actions">
+                               <button onClick={() => handleUserSelection(user)}>Edit</button>
+                               <button onClick={() => handleDeleteUser(user._id)}>Delete</button>
+                           </div>
+                       </li>
+                   ))}
+               </ul>
+           </section>
 
-    // Function to handle input changes in the form fields
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        // Update the currentUser state with the new input values
-        setCurrentUser(prev => ({ ...prev, [name]: value }));
-    };
-
-    // Function to reset the form fields and exit editing mode
-    const resetForm = () => {
-        setCurrentUser({
-            useremail: '',
-            password: '',
-            username: '',
-            usercompany: ''
-        });
-        setIsEditing(false);
-    };
-
-    // Function to handle user logout
-    const logoutUser = () => {
-        // Clear the JWT token from localStorage (or sessionStorage, depending on your setup)
-        localStorage.removeItem('jwtToken');  // Adjust this if you're using sessionStorage
-        // Redirect the user to the login page after logging out
-        navigate('/login');
-    };
-
-    return (
-        <div>
-            <h1>User Management</h1>
-            {/* Form to create or update a user */}
-            <form onSubmit={handleSubmit}>
-                <input 
-                    name="useremail" 
-                    value={currentUser.useremail} 
-                    onChange={handleChange} 
-                    placeholder="Email" 
-                />
-                <input 
-                    name="password" 
-                    value={currentUser.password} 
-                    onChange={handleChange} 
-                    placeholder="Password" 
-                    type="password" 
-                />
-                <input 
-                    name="username" 
-                    value={currentUser.username} 
-                    onChange={handleChange} 
-                    placeholder="Username" 
-                />
-                <input 
-                    name="usercompany" 
-                    value={currentUser.usercompany} 
-                    onChange={handleChange} 
-                    placeholder="Company" 
-                />
-                <button type="submit">{isEditing ? 'Update' : 'Create'}</button>
-            </form>
-
-            {/* List of existing users with edit and delete options */}
-            <ul>
-                {users.map(user => (
-                    <li key={user._id}>
-                        {user.username} - {user.usercompany}
-                        {/* Button to start editing a user */}
-                        <button onClick={() => { setCurrentUser({ ...user, password: '' }); setIsEditing(true); }}>
-                            Edit
-                        </button>
-                        {/* Button to delete a user */}
-                        <button onClick={() => deleteUser(user._id).then(() => setUsers(users.filter(u => u._id !== user._id)))}>
-                            Delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
-            
-            {/* Logout button to log the user out and redirect to login page */}
-            <button onClick={logoutUser}>Logout</button>
-        </div>
-    );
+           <section className="user-section">
+               <h2>{isEditing ? 'Edit User' : 'User Information'}</h2>
+               <div className="user-form">
+                   <input
+                       type="email"
+                       name="useremail"
+                       value={isEditing ? selectedUser.useremail : currentUser.useremail}
+                       onChange={handleChange}
+                       placeholder="Email"
+                   />
+                   <input
+                       type="text"
+                       name="username"
+                       value={isEditing ? selectedUser.username : currentUser.username}
+                       onChange={handleChange}
+                       placeholder="Username"
+                   />
+                   <input
+                       type="text"
+                       name="usercompany"
+                       value={isEditing ? selectedUser.usercompany : currentUser.usercompany}
+                       onChange={handleChange}
+                       placeholder="Company"
+                   />
+                   <button onClick={isEditing ? handleUpdateUser : resetForm}>
+                       {isEditing ? 'Update' : 'Clear'}
+                   </button>
+                   {isEditing && (
+                       <button onClick={resetForm}>
+                           Cancel
+                       </button>
+                   )}
+               </div>
+           </section>
+       </div>
+   );
 }
