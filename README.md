@@ -13,6 +13,7 @@ modal
 react router DOM
 react use
 axios
+cors
 
 
 ## Routes/pages - what pages
@@ -63,7 +64,20 @@ One of the first thing I made for this application was the routes. Once the rout
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard testing.png>)
 
 #### Allocation Page
+Confirm page is working
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page Testing.png>)
+
+Creating some data to check the API on front end
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/creating some data.png>)
+
+Confirm data is coming through
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/confrim it is working.png>)
+
+Data can be edited
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/edit.png>)
+
+Can be deleted
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/delete.png>)
 
 #### Asset Page
 Confirming route made
