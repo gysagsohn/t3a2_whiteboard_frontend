@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import axiosInstance from '../utils/axiosInstance';
 
 export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
