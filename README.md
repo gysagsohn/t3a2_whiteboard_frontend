@@ -194,3 +194,9 @@ After few rounds of code adjustment, login/sign up function is working:
 Checked URL is working and website is working
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Hosting working.png>)
 
+### URL for website
+whiteboardscheduler.com 
+
+I had this URL and after deploying had to redirect the DNS to make this work. It isn't working but need to come back to make sure it is working
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/URL working.png>)
+
