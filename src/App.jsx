@@ -9,6 +9,8 @@ import AllocationPage from "./pages/AllocationPage";
 import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
 import axiosInstance from './utils/axiosInstance';
+import ContactPage from './pages/ContactPage';
+
 
 function App() {
     const navigate = useNavigate();
@@ -32,7 +34,7 @@ function App() {
 
     return (
         <Routes>
-            <Route path="/" element={<Template />} >
+            <Route path="/" element={<Template isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} >
                 <Route index element={<DashboardPage />} />
                 <Route path="operator" element={isAuthenticated ? <OperatorPage /> : <LoginPage />} />
                 <Route path="asset" element={isAuthenticated ? <AssetPage /> : <LoginPage />} />
@@ -41,6 +43,7 @@ function App() {
                 <Route path="user" element={isAuthenticated ? <UserPage /> : <LoginPage />} />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="dashboard" element={<DashboardPage />} />
+                <Route path="contact" element={isAuthenticated ? <ContactPage /> : <LoginPage />} />
             </Route>
         </Routes>
     );

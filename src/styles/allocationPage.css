@@ -1,0 +1,114 @@
+@import './colors.css';
+@import './buttons.css';
+
+
+.allocation-container {
+ padding: 20px;
+ background-color: var(--off-white);
+}
+
+
+.allocation-section {
+ background-color: var(--light-orange);
+ border-radius: 8px;
+ color: var(--white);
+ padding: 20px;
+ margin-bottom: 20px;
+}
+
+
+.allocation-list {
+ list-style: none;
+ padding: 0;
+ margin: 0;
+ max-height: 300px;
+ overflow-y: auto;
+}
+
+
+.allocation-list li {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-bottom: 10px;
+ line-height: 1.5;
+ flex-wrap: wrap; /* Ensure items wrap properly */
+}
+
+
+.allocation-actions {
+ display: flex;
+ gap: 10px;
+}
+
+
+.allocation-form {
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+}
+
+
+.allocation-selection {
+ display: flex;
+ gap: 10px;
+ margin-top: 10px;
+}
+
+
+.allocation-selection p {
+ margin: 0;
+}
+
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+ .allocation-list li {
+     flex-direction: column;
+     align-items: flex-start;
+ }
+
+
+ .allocation-actions {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     gap: 5px;
+ }
+
+
+ .allocation-form {
+     gap: 5px;
+ }
+
+
+ .allocation-selection {
+     flex-direction: column;
+     gap: 5px;
+ }
+
+
+ .allocation-form button {
+     width: 100%;
+ }
+}
+
+
+@media (max-width: 480px) {
+ .allocation-list li {
+     font-size: 14px;
+ }
+
+
+ .allocation-actions button,
+ .allocation-form button {
+     width: 100%;
+ }
+
+
+ .allocation-selection button {
+     width: 100%;
+ }
+}
+
+

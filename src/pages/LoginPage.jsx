@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../utils/axiosInstance';
+import '../styles/loginPage.css';
+
 
 Modal.setAppElement('#root');
 
@@ -43,10 +45,19 @@ export default function LoginPage() {
     };
 
     return (
-        <div>
-            <h1>Welcome! Please login or sign up.</h1>
-            <button onClick={() => setIsLoginModalOpen(true)}>Login</button>
-            <button onClick={() => setIsSignupModalOpen(true)}>Sign Up</button>
+        <div className="login-page">
+            <div className="left-half">
+                <div className="logo-container">
+                    <img src="/logo.png" alt="Company Logo" />
+                </div>
+            </div>
+            <div className="right-half">
+                <h1>Welcome! Please login or sign up.</h1>
+                <div className="button-group">
+                    <button onClick={() => setIsLoginModalOpen(true)}>Login</button>
+                    <button onClick={() => setIsSignupModalOpen(true)}>Sign Up</button>
+                </div>
+            </div>
 
             <Modal
                 isOpen={isLoginModalOpen}

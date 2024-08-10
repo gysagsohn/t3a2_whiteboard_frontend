@@ -19,6 +19,7 @@ react router DOM
 react use
 axios
 cors
+react-icons - for contact page
 
 
 ## Routes/pages - what pages
@@ -188,3 +189,8 @@ After few rounds of code adjustment, login/sign up function is working:
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/new user sign up 1.png>)
 
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/Screenshot 2024-08-10 at 10.26.26 AM.png>)
+
+### Hosting 
+Checked URL is working and website is working
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Hosting working.png>)
+
