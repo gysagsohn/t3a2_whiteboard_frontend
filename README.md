@@ -59,19 +59,43 @@ axios
 
 One of the first thing I made for this application was the routes. Once the routes was set, I tested to make sure it was working: 
 
-Dashboard Page
+#### Dashboard Page
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard testing.png>)
 
-Allocation Page
+#### Allocation Page
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page Testing.png>)
 
-Asset Page
+#### Asset Page
+Confirming route made
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Asset Page testing.png>)
+
+Tested to confirm that the backend server was working and asset could be created
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/Asset API tested.png>)
+
+Confirmed that API was being called and could see the asset created directly to backend
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/asset page with an asset created.png>) 
+
 
 Having issues with creating asset
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/issues with Allocation.png>)
 
-Client Page
+Round two testing after changing a bit of backend on what data it sent and frontend 
+
+Created buttons for the asset type and license type based off the database information 
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/AssetAPI.png>)
+
+I was attempting to write the new information but it would not show up on the screen
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/failed  doenst show what I am typing.png>)
+
+Round 3 
+It previews correctly 
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/test to show it shows preview.png>)
+
+New asset created
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/new asset.png>)
+
+
+#### Client Page
 Test to see the route is working
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page testing.png>)
 
@@ -87,11 +111,26 @@ Deleting client
 Editing client
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/editing client.png>)
 
-Operator Page
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Opeartor page testing.png>)
+#### Operator Page
+Route for Operator Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/Opeartor page testing.png>)
 
-User Page
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/User Page Testing.png>)
+API called for Operator Page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/Operator Page.png>)
+
+Function for new operator
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/New operator.png>)
+
+Edit operator
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/edit operator.png>)
+
+Delete Operator
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/delete operator.png>)
+
+
+#### User Page
+Route for user page
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/userPage/User Page Testing.png>)
 
 Testing user API
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/userPage/User API.png>)
@@ -102,6 +141,28 @@ editing user
 Deleting user
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/userPage/Screenshot 2024-08-09 at 9.31.14 AM.png>)
 
-Login Page
+#### Login Page/Signup page
+Basic Route created
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page testing.png>)
 
+
+Protected route created, and if there isn't a valid JWT user is sent to that page to login or sign up. 
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/Login:singup page with options for both.png>)
+
+However, first round of code, wouldn't let the user login or sign up
+
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/failed signup.png>) 
+
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/failed login.png>)
+
+or when new user were signed up they would sign up  but no JWT token was being sent back. I could confirm that new user was being created on the backend 
+
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/backend API call.png>)
+
+After few rounds of code adjustment, login/sign up function is working:
+
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/USer logged in.png>)
+
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/new user sign up 1.png>)
+
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/Screenshot 2024-08-10 at 10.26.26 AM.png>)
