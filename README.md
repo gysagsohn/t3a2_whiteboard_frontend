@@ -4,6 +4,11 @@ This is the front end for my T3A2 MERN full stack webapplication.
 Backend repository can be found at:
 https://github.com/gysagsohn/T3A2B_whiteboardscheduler_backend/
 
+Website can be found at:
+https://whiteboardschedulercom.netlify.app/
+
+https://whiteboardscheduler.com/ - I have pointed the DNS just need to see if it changes after 24 hours
+
 I have added another file to this repository called T3A2A, that contains all of the Part A of this assignment and the planning for it.
 
 ## Packages
