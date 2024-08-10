@@ -83,8 +83,16 @@ export default function AssetPage() {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setNewAsset(prev => ({ ...prev, [name]: value }));
+    
+        if (isEditing && selectedAsset) {
+            // Update the selectedAsset state if in editing mode
+            setSelectedAsset(prev => ({ ...prev, [name]: value }));
+        } else {
+            // Update the newAsset state if creating a new asset
+            setNewAsset(prev => ({ ...prev, [name]: value }));
+        }
     };
+    
 
     const handleSelectionChange = (type, field) => {
         setNewAsset(prev => ({

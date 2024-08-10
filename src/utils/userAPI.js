@@ -11,10 +11,10 @@ export const fetchUsers = async () => {
     }
 };
 
-// Create a new user
+// Create a new user (Signup)
 export const createUser = async (userData) => {
     try {
-        const response = await axios.post('/users', userData);
+        const response = await axios.post('/users/signup', userData);  // Updated to use '/signup' route
         return response.data.result;
     } catch (error) {
         console.error('Error creating user:', error);
@@ -40,6 +40,17 @@ export const deleteUser = async (userId) => {
         return response.data.result;
     } catch (error) {
         console.error('Error deleting user:', error);
+        throw error;
+    }
+};
+
+// Login User
+export const loginUser = async (userData) => {
+    try {
+        const response = await axios.post('/users/login', userData);
+        return response.data; // Return the full response data, including the token
+    } catch (error) {
+        console.error('Error logging in:', error);
         throw error;
     }
 };

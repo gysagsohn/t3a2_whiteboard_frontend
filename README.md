@@ -23,6 +23,7 @@ axios
 - client
 - allocation 
 - user
+- logout function - not a page but removing JWT token
 
 ## Contexts
 
