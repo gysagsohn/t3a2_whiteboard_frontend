@@ -63,6 +63,9 @@ One of the first thing I made for this application was the routes. Once the rout
 #### Dashboard Page
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard testing.png>)
 
+Confirmed the data is coming through and links to other site is working
+![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard API.png>)
+
 #### Allocation Page
 Confirm page is working
 ![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page Testing.png>)
