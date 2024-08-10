@@ -1,0 +1,32 @@
+@import './colors.css';
+
+.template-container {
+   display: flex;
+   height: 100vh; /* Ensures it takes the full viewport height */
+}
+
+.navbar-container {
+   flex-shrink: 0; /* Prevents the navbar from shrinking */
+   width: 200px;
+}
+
+.content-area {
+   flex-grow: 1; /* The content area grows to fill the available space */
+   padding: 20px;
+   overflow-y: auto;
+   background-color: var(--off-white);
+}
+
+@media (max-width: 768px) {
+   .template-container {
+       flex-direction: column;
+   }
+
+   .navbar-container {
+       width: 100%;
+   }
+
+   .content-area {
+       padding: 10px;
+   }
+}

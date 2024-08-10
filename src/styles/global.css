@@ -1,0 +1,30 @@
+@import './colors.css';
+@import './buttons.css';
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--off-white);
+    color: var(--obsidian-black);
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--cyan-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--light-orange);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--obsidian-black);
+}
+
+p {
+    line-height: 1.6;
+}
+
+
