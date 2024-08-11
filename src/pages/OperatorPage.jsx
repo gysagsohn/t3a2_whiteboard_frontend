@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { fetchOperators, createOperator, updateOperator, deleteOperator } from '../utils/operatorAPI';
-import '../styles/operatorPage.css'; // Import the new CSS file
+import '../styles/operatorPage.css'; 
 
+ // Define the OperatorPage component
 export default function OperatorPage() {
+    // State variables for managing operators and the current operator being edited or created
     const [operators, setOperators] = useState([]);
     const [currentOperator, setCurrentOperator] = useState({
         operatorName: '',
@@ -12,10 +14,12 @@ export default function OperatorPage() {
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
+         // Load operators when the component mounts
         loadOperators();
     }, []);
 
     const loadOperators = async () => {
+        // Function to fetch and set the list of operators
         try {
             const operatorsData = await fetchOperators();
             setOperators(operatorsData);
@@ -25,10 +29,12 @@ export default function OperatorPage() {
     };
 
     const handleSelectLicenceClass = (licenceClass) => {
+        // Update the licence class for the current operator
         setCurrentOperator(prev => ({ ...prev, licenceClass }));
     };
 
     const handleToggleDay = (day) => {
+        // Toggle the selected days for the current operator
         setCurrentOperator(prev => {
             const newDays = prev.availableDays.includes(day) ?
                 prev.availableDays.filter(d => d !== day) :
@@ -38,6 +44,7 @@ export default function OperatorPage() {
     };
 
     const handleSubmit = async (event) => {
+        // Handle form submission for creating or updating an operator
         event.preventDefault();
         try {
             const response = isEditing ? await updateOperator(currentOperator._id, currentOperator) : await createOperator(currentOperator);
@@ -49,6 +56,7 @@ export default function OperatorPage() {
     };
 
     const resetForm = () => {
+        // Reset the form to its initial state
         setCurrentOperator({ operatorName: '', licenceClass: '', availableDays: [] });
         setIsEditing(false);
     };

@@ -2,10 +2,12 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import axiosInstance from '../utils/axiosInstance';
 import '../styles/navbar.css';
 
+// NavBar component that renders the navigation menu
 export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+// Function to handle user logout
   const handleLogout = async () => {
       try {
           await axiosInstance.post('/users/logout');
@@ -21,6 +23,7 @@ export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
       return null;
   }
 
+// Return the navbar component
   return (
       <header className="navbar-container">
           <div className="logo">

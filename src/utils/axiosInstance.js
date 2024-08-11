@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'https://t3a2b-whiteboardscheduler-backend.onrender.com/',
-    withCredentials: true, // Ensure cookies are included with requests
+    withCredentials: true,
 });
 
 // Add a request interceptor to include the JWT token

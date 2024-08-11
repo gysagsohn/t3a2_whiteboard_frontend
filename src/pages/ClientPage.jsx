@@ -3,15 +3,18 @@ import axios from '../utils/axiosInstance.js';
 import '../styles/clientPage.css';
 
 export default function ClientPage() {
+    // State variables to manage the list of clients and the form data
   const [clients, setClients] = useState([]);
   const [newClient, setNewClient] = useState({ clientname: '', Projects: '' });
   const [selectedClient, setSelectedClient] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
 
+  // useEffect hook to fetch the clients when the component mounts
   useEffect(() => {
     fetchClients();
   }, []);
 
+  // Function to fetch clients from the server
   const fetchClients = async () => {
     try {
       const response = await axios.get('/clients');
@@ -21,6 +24,7 @@ export default function ClientPage() {
     }
   };
 
+  // Function to handle changes in the input fields
   const handleInputChange = (event, field) => {
     const { value } = event.target;
     if (isEditing) {
@@ -30,38 +34,42 @@ export default function ClientPage() {
     }
   };
 
+  // Function to handle form submission for creating or updating a client
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent the default form submission
     try {
       const clientData = isEditing ? selectedClient : newClient;
       const response = isEditing
-        ? await axios.put(`/clients/${selectedClient._id}`, clientData)
-        : await axios.post('/clients', clientData);
+        ? await axios.put(`/clients/${selectedClient._id}`, clientData) // Update client if editing
+        : await axios.post('/clients', clientData); // Create a new client if not editing
+      // Update the clients list with the new or updated client
       const updatedClients = isEditing
         ? clients.map((client) =>
             client._id === response.data.result._id ? response.data.result : client
           )
         : [...clients, response.data.result];
       setClients(updatedClients);
-      resetForm();
+      resetForm(); // Reset the form after submission
     } catch (error) {
       console.error('Failed to submit client:', error);
     }
   };
 
+  // Function to handle deleting a client
   const handleDelete = async (id) => {
     try {
       await axios.delete(`/clients/${id}`);
-      setClients(clients.filter((client) => client._id !== id));
+      setClients(clients.filter((client) => client._id !== id)); // Remove the deleted client from the list
     } catch (error) {
       console.error('Failed to delete client:', error);
     }
   };
 
+  // Function to reset the form and exit editing mode
   const resetForm = () => {
-    setNewClient({ clientname: '', Projects: '' });
+    setNewClient({ clientname: '', Projects: '' }); // Clear the form fields
     setSelectedClient(null);
-    setIsEditing(false);
+    setIsEditing(false); // Exit editing mode
   };
 
   return (
