@@ -4,7 +4,7 @@ import { fetchAllocations } from '../utils/allocationAPI';
 import { fetchAssets } from '../utils/assetAPI';
 import { fetchClients } from '../utils/clientAPI';
 import { fetchOperators } from '../utils/operatorAPI';
-import '..//styles/dashbaordPage.css';
+import '../styles/dashbaordPage.css'; // Corrected the typo in the import
 
 // Define the DashboardPage component
 export default function DashboardPage() {
@@ -72,7 +72,13 @@ export default function DashboardPage() {
         <ul className="dashboard-list">
           {allocations.map(allocation => (
             <li key={allocation._id}>
-              {allocation.asset.assetnumber} - {allocation.operator.operatorName} - {allocation.client.clientname} - {allocation.shiftType}
+              {/* Fallback for asset number */}
+              {allocation.asset?.assetnumber || 'No Asset Assigned'} - 
+              {/* Fallback for operator name */}
+              {allocation.operator?.operatorName || 'No Operator Assigned'} - 
+              {/* Fallback for client name */}
+              {allocation.client?.clientname || 'No Client Assigned'} - 
+              {allocation.shiftType}
             </li>
           ))}
         </ul>
@@ -84,7 +90,10 @@ export default function DashboardPage() {
         <ul className="dashboard-list">
           {assets.map(asset => (
             <li key={asset._id}>
-              {asset.assetnumber} - {asset.assetType.join(', ')} - {asset.rego}
+              {asset.assetnumber} - 
+              {/* Fallback for asset type */}
+              {asset.assetType?.join(', ') || 'No Asset Type'} - 
+              {asset.rego}
             </li>
           ))}
         </ul>
@@ -96,7 +105,9 @@ export default function DashboardPage() {
         <ul className="dashboard-list">
           {clients.map(client => (
             <li key={client._id}>
-              {client.clientname} - {client.Projects}
+              {client.clientname} - 
+              {/* Fallback for projects */}
+              {client.Projects || 'No Projects Assigned'}
             </li>
           ))}
         </ul>
@@ -108,7 +119,11 @@ export default function DashboardPage() {
         <ul className="dashboard-list">
           {operators.map(operator => (
             <li key={operator._id}>
-              {operator.operatorName} - {operator.licenceClass.join(', ')} - Days: {operator.availableDays.join(', ')}
+              {operator.operatorName} - 
+              {/* Fallback for licence class */}
+              {operator.licenceClass?.join(', ') || 'No Licence Class'} - 
+              {/* Fallback for available days */}
+              Days: {operator.availableDays?.join(', ') || 'No Available Days'}
             </li>
           ))}
         </ul>
