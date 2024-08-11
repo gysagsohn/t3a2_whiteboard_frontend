@@ -5,11 +5,13 @@ import { fetchClients } from '../utils/clientAPI';
 import { fetchOperators } from '../utils/operatorAPI';
 import '../styles/allocationPage.css';
 
+// State hooks to manage data for allocations, assets, clients, and operators
 export default function AllocationPage() {
    const [allocations, setAllocations] = useState([]);
    const [assets, setAssets] = useState([]);
    const [clients, setClients] = useState([]);
    const [operators, setOperators] = useState([]);
+// State for managing the form data for a new or selected allocation
    const [newAllocation, setNewAllocation] = useState({
        asset: '',
        operator: '',
@@ -21,6 +23,7 @@ export default function AllocationPage() {
    const [isEditing, setIsEditing] = useState(false);
 
    useEffect(() => {
+        // Load data when the component mounts
        loadAllocations();
        loadAssets();
        loadClients();
@@ -28,6 +31,7 @@ export default function AllocationPage() {
    }, []);
 
    const loadAllocations = async () => {
+    // Fetch assets from the backend and update state
        try {
            const data = await fetchAllocations();
            setAllocations(data || []);
@@ -37,6 +41,7 @@ export default function AllocationPage() {
    };
 
    const loadAssets = async () => {
+    // Fetch clients from the backend and update state
        try {
            const data = await fetchAssets();
            setAssets(data || []);
@@ -46,6 +51,7 @@ export default function AllocationPage() {
    };
 
    const loadClients = async () => {
+     // Fetch operators from the backend and update state
        try {
            const data = await fetchClients();
            setClients(data || []);
@@ -55,6 +61,7 @@ export default function AllocationPage() {
    };
 
    const loadOperators = async () => {
+    // Handle the creation of a new allocation
        try {
            const data = await fetchOperators();
            setOperators(data || []);
@@ -64,6 +71,7 @@ export default function AllocationPage() {
    };
 
    const handleCreateAllocation = async () => {
+    // Handle the updating of an existing allocation
        try {
            const createdAllocation = await createAllocation(newAllocation);
            setAllocations([...allocations, createdAllocation]);
@@ -74,6 +82,7 @@ export default function AllocationPage() {
    };
 
    const handleUpdateAllocation = async () => {
+    // Handle the deletion of an allocation
        if (selectedAllocation) {
            try {
                const updatedAllocation = await updateAllocation(selectedAllocation._id, selectedAllocation);
@@ -86,6 +95,7 @@ export default function AllocationPage() {
    };
 
    const handleDeleteAllocation = async (id) => {
+     // Handle the deletion of an allocation
        try {
            await deleteAllocation(id);
            setAllocations(allocations.filter(a => a._id !== id));
@@ -95,6 +105,7 @@ export default function AllocationPage() {
    };
 
    const handleInputChange = (e) => {
+    // Handle input changes for form fields
        const { name, value } = e.target;
        if (isEditing && selectedAllocation) {
            setSelectedAllocation(prev => ({ ...prev, [name]: value }));
@@ -104,6 +115,7 @@ export default function AllocationPage() {
    };
 
    const handleSelectionChange = (value, field) => {
+        // Set the selected allocation for editing
        if (isEditing && selectedAllocation) {
            setSelectedAllocation(prev => ({ ...prev, [field]: value }));
        } else {
@@ -112,11 +124,13 @@ export default function AllocationPage() {
    };
 
    const handleAllocationSelection = (allocation) => {
+        // Set the selected allocation for editing
        setSelectedAllocation(allocation);
        setIsEditing(true);
    };
 
    const resetForm = () => {
+    // Reset the form to its initial state
        setNewAllocation({
            asset: '',
            operator: '',

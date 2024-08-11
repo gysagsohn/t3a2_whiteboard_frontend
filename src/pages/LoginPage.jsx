@@ -4,41 +4,52 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../utils/axiosInstance';
 import '../styles/loginPage.css';
 
-
+// Set the root element for modals
 Modal.setAppElement('#root');
 
+// Define the LoginPage component
 export default function LoginPage() {
+    // State variables for managing modal visibility and form inputs
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [usercompany, setUserCompany] = useState('');
+    // Initialize the useNavigate hook for page navigation
     const navigate = useNavigate();
 
+    // Function to handle login
     const handleLogin = async () => {
         try {
+            // Send a POST request to the login endpoint
             const response = await axiosInstance.post('/users/login', {
                 useremail: email,
                 password: password
             });
-            localStorage.setItem('jwtToken', response.data.token);  // Save JWT token to local storage
-            navigate('/dashboard');  // Navigate to Dashboard after login
+            // Save JWT token to local storage
+            localStorage.setItem('jwtToken', response.data.token); 
+            // Navigate to Dashboard after login
+            navigate('/dashboard'); 
         } catch (error) {
             console.error('Login failed:', error.response?.data?.message || error.message);
         }
     };
 
+    // Function to handle signup
     const handleSignup = async () => {
         try {
+            // Send a POST request to the signup endpoint
             const response = await axiosInstance.post('/users/signup', {
                 useremail: email,
                 password: password,
                 username: username,
                 usercompany: usercompany
             });
-            localStorage.setItem('jwtToken', response.data.token);  // Save JWT token to local storage
-            navigate('/dashboard');  // Navigate to Dashboard after signup
+            // Save JWT token to local storage
+            localStorage.setItem('jwtToken', response.data.token);  
+            // Navigate to Dashboard after signup
+            navigate('/dashboard');  
         } catch (error) {
             console.error('Signup failed:', error.response?.data?.message || error.message);
         }

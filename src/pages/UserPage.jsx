@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { fetchUsers, updateUser, deleteUser } from '../utils/userAPI';
 import '../styles/userPage.css';
 
+// Define the UserPage component
 export default function UserPage() {
+// State variables for managing users, the current user being edited, and edit mode
    const [users, setUsers] = useState([]);
    const [currentUser, setCurrentUser] = useState({
        useremail: '',
@@ -14,10 +16,12 @@ export default function UserPage() {
    const [isEditing, setIsEditing] = useState(false);
 
    useEffect(() => {
+    // Load users when the component mounts
        loadUsers();
    }, []);
 
    const loadUsers = async () => {
+    // Function to fetch and set the list of users
        try {
            const usersData = await fetchUsers();
            setUsers(usersData || []);
@@ -27,6 +31,7 @@ export default function UserPage() {
    };
 
    const handleUpdateUser = async () => {
+    // Function to handle updating a user
        if (selectedUser) {
            try {
                const updatedUser = await updateUser(selectedUser._id, {
@@ -34,38 +39,47 @@ export default function UserPage() {
                    username: selectedUser.username,
                    usercompany: selectedUser.usercompany
                });
+               // Update the users list with the updated user data
                setUsers(users.map(u => u._id === updatedUser._id ? updatedUser : u));
-               resetForm();
+               // Reset the form after updating
+               resetForm(); 
            } catch (error) {
                console.error('Failed to update user', error);
            }
        }
    };
 
+   // Function to handle deleting a user
    const handleDeleteUser = async (id) => {
        try {
            await deleteUser(id);
+           // Remove the deleted user from the users list
            setUsers(users.filter(u => u._id !== id));
        } catch (error) {
            console.error('Failed to delete user', error);
        }
    };
 
+   // Handle input changes for the form
    const handleChange = (e) => {
        const { name, value } = e.target;
        if (isEditing && selectedUser) {
+        // Update the selected user state if in editing mode
            setSelectedUser(prev => ({ ...prev, [name]: value }));
        } else {
+        // Update the current user state if creating a new user
            setCurrentUser(prev => ({ ...prev, [name]: value }));
        }
    };
 
    const handleUserSelection = (user) => {
+        // Select a user for editing
        setSelectedUser(user);
        setIsEditing(true);
    };
 
    const resetForm = () => {
+     // Reset the form to its initial state
        setCurrentUser({
            useremail: '',
            password: '',
@@ -73,6 +87,7 @@ export default function UserPage() {
            usercompany: ''
        });
        setSelectedUser(null);
+       // Set editing mode to false
        setIsEditing(false);
    };
 

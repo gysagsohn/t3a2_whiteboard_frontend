@@ -4,9 +4,11 @@ import axiosInstance from '../utils/axiosInstance';
 import '../styles/assetPage.css';
 
 export default function AssetPage() {
+    // State variables to manage assets, asset type options, and license class options
    const [assets, setAssets] = useState([]);
    const [assetTypeOptions, setAssetTypeOptions] = useState([]);
    const [licenceClassOptions, setLicenceClassOptions] = useState([]);
+    // State variables to manage new asset data and selected asset for editing
    const [newAsset, setNewAsset] = useState({
        assetnumber: '',
        assetType: [],
@@ -16,6 +18,7 @@ export default function AssetPage() {
    const [selectedAsset, setSelectedAsset] = useState(null);
    const [isEditing, setIsEditing] = useState(false);
 
+    // useEffect hook to load assets and options when the component mounts
    useEffect(() => {
        const loadAssets = async () => {
            try {
@@ -44,53 +47,64 @@ export default function AssetPage() {
            }
        };
 
+       // Load assets and options when the component mounts
        loadAssets();
        loadAssetTypeOptions();
        loadLicenceClassOptions();
    }, []);
 
+     // Function to handle creating a new asset
    const handleCreateAsset = async () => {
        try {
            const createdAsset = await createAsset(newAsset);
            setAssets([...assets, createdAsset.result]);
+            // Reset the new asset form after creation
            setNewAsset({ assetnumber: '', assetType: [], rego: '', licenceClass: [] });
        } catch (error) {
            console.error('Failed to create asset', error);
        }
    };
 
+   // Function to handle updating an existing asset
    const handleUpdateAsset = async () => {
        if (selectedAsset) {
            try {
                const updatedAsset = await updateAsset(selectedAsset._id, selectedAsset);
+                // Update the assets list with the updated asset
                setAssets(assets.map(a => a._id === updatedAsset.result._id ? updatedAsset.result : a));
                setSelectedAsset(null);
-               setIsEditing(false);
+               setIsEditing(false); // Exit editing mode
            } catch (error) {
                console.error('Failed to update asset', error);
            }
        }
    };
 
+   // Function to handle deleting an asset
    const handleDeleteAsset = async (id) => {
        try {
            await deleteAsset(id);
+           // Remove the deleted asset from the list
            setAssets(assets.filter(a => a._id !== id));
        } catch (error) {
            console.error('Failed to delete asset', error);
        }
    };
 
+    // Function to handle changes in form input fields
    const handleInputChange = (e) => {
        const { name, value } = e.target;
 
        if (isEditing && selectedAsset) {
+        // Update the selected asset in editing mode
            setSelectedAsset(prev => ({ ...prev, [name]: value }));
        } else {
+        // Update the new asset data
            setNewAsset(prev => ({ ...prev, [name]: value }));
        }
    };
 
+    // Function to handle changes in asset type or license class selection
    const handleSelectionChange = (type, field) => {
        setNewAsset(prev => ({
            ...prev,
@@ -98,9 +112,10 @@ export default function AssetPage() {
        }));
    };
 
+   // Function to handle selection of an asset for editing
    const handleAssetSelection = (asset) => {
        setSelectedAsset(asset);
-       setIsEditing(true);
+       setIsEditing(true); // Enter editing mode
    };
 
    return (
