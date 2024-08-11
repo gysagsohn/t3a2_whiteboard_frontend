@@ -6,20 +6,26 @@ import { fetchClients } from '../utils/clientAPI';
 import { fetchOperators } from '../utils/operatorAPI';
 import '..//styles/dashbaordPage.css';
 
+// Define the DashboardPage component
 export default function DashboardPage() {
+  // Set up state variables to store data for allocations, assets, clients, and operators
   const [allocations, setAllocations] = useState([]);
   const [assets, setAssets] = useState([]);
   const [clients, setClients] = useState([]);
   const [operators, setOperators] = useState([]);
+  // Initialize the useNavigate hook for page navigation
   const navigate = useNavigate();
 
+  // Load data when the component is mounted
   useEffect(() => {
     loadAllocations();
     loadAssets();
     loadClients();
     loadOperators();
+    // Empty dependency array means this runs once when the component mounts
   }, []);
 
+  // Function to fetch and set allocations data
   const loadAllocations = async () => {
     try {
       const data = await fetchAllocations();
@@ -29,6 +35,7 @@ export default function DashboardPage() {
     }
   };
 
+  // Function to fetch and set assets data
   const loadAssets = async () => {
     try {
       const data = await fetchAssets();
@@ -38,6 +45,7 @@ export default function DashboardPage() {
     }
   };
 
+  // Function to fetch and set clients data
   const loadClients = async () => {
     try {
       const data = await fetchClients();
@@ -47,6 +55,7 @@ export default function DashboardPage() {
     }
   };
 
+  // Function to fetch and set operators data
   const loadOperators = async () => {
     try {
       const data = await fetchOperators();

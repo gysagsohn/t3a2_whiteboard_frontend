@@ -11,28 +11,35 @@ import LoginPage from "./pages/LoginPage";
 import axiosInstance from './utils/axiosInstance';
 import ContactPage from './pages/ContactPage';
 
-
+// Main App component
 function App() {
+   // Hook to programmatically navigate users
     const navigate = useNavigate();
+    // State to track user authentication status
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+     // useEffect to check if the user is authenticated on component mount
     useEffect(() => {
         const checkAuth = async () => {
             try {
+            // Check if the user is authenticated by sending a request to the API
                 await axiosInstance.get('/users');
                 setIsAuthenticated(true);
             } catch (error) {
                 setIsAuthenticated(false);
+            // If the user is not authenticated and not on login/signup page, navigate to login
                 if (!['/login', '/signup'].includes(window.location.pathname)) {
                     navigate('/login');
                 }
             }
         };
-
+    // Call the checkAuth function
         checkAuth();
+    // Dependency array to ensure this effect runs on component mount
     }, [navigate]);
 
     return (
+        // Define routes for the application
         <Routes>
             <Route path="/" element={<Template isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />} >
                 <Route index element={<DashboardPage />} />

@@ -1,4 +1,5 @@
 import React from 'react';
+// Import GitHub and LinkedIn icons from the react-icons library
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import '../styles/contactPage.css';
 

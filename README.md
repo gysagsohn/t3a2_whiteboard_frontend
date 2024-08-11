@@ -1,202 +1,256 @@
-# t3a2_whiteboard_frontend
-This is the front end for my T3A2 MERN full stack webapplication. 
+# T3A2 Whiteboard Scheduler Frontend
 
-Backend repository can be found at:
-https://github.com/gysagsohn/T3A2B_whiteboardscheduler_backend/
+This is the frontend for my T3A2 MERN full stack web application. This project serves as the interface for managing operators, assets, clients, and allocations in a scheduling system. The application is designed with React and implements various features such as authentication, CRUD operations, and responsive design.
 
-Website can be found at:
-https://whiteboardschedulercom.netlify.app/
+### Repository Links:
+- **Frontend Repository**: [GitHub - Frontend](https://github.com/gysagsohn/t3a2_whiteboard_frontend)
+- **Backend Repository**: [GitHub - Backend](https://github.com/gysagsohn/T3A2B_whiteboardscheduler_backend)
 
-https://whiteboardscheduler.com/ - I have pointed the DNS just need to see if it changes after 24 hours
+### Website Links:
+- **Live Website**: [Whiteboard Scheduler](https://whiteboardschedulercom.netlify.app/)
+- **Custom Domain**: [whiteboardscheduler.com](https://whiteboardscheduler.com/)
 
-I have added another file to this repository called T3A2A, that contains all of the Part A of this assignment and the planning for it.
+### Deployment
+- The frontend has been deployed using **Netlify**.
 
-## Packages
-React
-syntax highlighter - see if we need it
-modal 
-react router DOM
-react use
-axios
-cors
-react-icons - for contact page
+### Project Overview
+This application allows users to manage scheduling information for operators, assets, clients, and allocations through a user-friendly interface. The frontend communicates with the backend via RESTful APIs to perform CRUD operations.
 
+## Packages Used
+- **React**: Core framework for building the user interface.
+- **React Router DOM**: For handling routing and navigation between pages.
+- **React Modal**: For implementing modals on the login and signup pages.
+- **Axios**: For making HTTP requests to the backend API.
+- **CORS**: To enable cross-origin resource sharing between the frontend and backend.
+- **React Icons**: For adding icons (GitHub, LinkedIn) to the contact page.
 
-## Routes/pages - what pages
-- dashboard will be home page
-- login page - need logic so that if you aren't logged in, it takes you to login page
-- operator
-- asset
-- client
-- allocation 
-- user
-- logout function - not a page but removing JWT token
+## Routes/Pages
+The application is divided into several pages, each accessible through specific routes:
+
+- **Dashboard Page** (`/`): Home page displaying a summary of allocations, assets, clients, and operators.
+- **Login Page** (`/login`): Allows users to log in; redirects to the dashboard upon successful login.
+- **Operator Page** (`/operator`): Manage operators, including creating, updating, and deleting operator records.
+- **Asset Page** (`/asset`): Manage assets with options to create, update, and delete asset records.
+- **Client Page** (`/client`): Manage client information with full CRUD functionality.
+- **Allocation Page** (`/allocation`): Manage allocations, including assigning assets and operators to clients.
+- **User Page** (`/user`): Manage user details; currently allows editing and deleting user profiles.
+- **Contact Page** (`/contact`): Displays contact information with links to GitHub and LinkedIn profiles.
 
 ## Contexts
+- **Authentication Context**: Used to manage user authentication state across the application, ensuring only authenticated users can access certain pages.
 
-- authentication 
+## Data Management
+The application handles the following data entities, each corresponding to specific pages:
+- **Login**: Authenticates users and manages session tokens.
+- **Operator**: Handles data related to operators, including license classes and available days.
+- **Asset**: Manages assets, including asset types and registration information.
+- **Client**: Manages client information and associated projects.
+- **Allocation**: Manages the allocation of assets and operators to clients.
+- **User**: Handles user profiles, allowing updates to user details.
 
-## Data
-- login
-- opeartor
-- asset 
-- clinet
-- allocation 
-- user
+## Components
+The application is built with reusable components to enhance maintainability and scalability:
+- **NavBar**: A responsive navigation bar that includes links to different pages and a logout button. It dynamically changes color based on the current active page.
+- **Header**: Contains the application’s logo and a link back to the dashboard.
+- **Button**: Customizable buttons used throughout the application, with styles that change on hover and active states.
 
-## function
+## Styling (CSS)
+The application uses a modular CSS approach, with separate files for each component and page:
+- **Global Styles** (`global.css`): Contains the base styles for the entire application, including typography and colors.
+- **Button Styles** (`buttons.css`): Defines the styles for primary, secondary, and disabled buttons.
+- **Page-Specific Styles**: Each page has its own CSS file to handle unique styling needs:
+  - `dashboardPage.css`
+  - `operatorPage.css`
+  - `assetPage.css`
+  - `clientPage.css`
+  - `allocationPage.css`
+  - `userPage.css`
+  - `contactPage.css`
+- **Responsive Design**: CSS media queries are used to ensure the application is fully responsive and usable on different screen sizes.
 
+## Functional Overview
+The application is designed with the following functionalities:
+- **Authentication**: Users must log in to access most of the pages. JWT tokens are stored in local storage to maintain sessions.
+- **CRUD Operations**: Each data entity (operator, asset, client, allocation, user) can be created, read, updated, and deleted through the respective pages.
+- **Responsive Design**: The application is fully responsive, with layouts adjusting for mobile, tablet, and desktop screens.
+- **Modals**: The login and signup forms are displayed in modals, providing a smooth user experience without navigating away from the current page.
 
-## component  
-- header
-- change of button clour when you hover over it
-- change of colour when you are on the page 
-- dark/light mode - stretch goal
-- logo taking back to dash baord
-- user profile lead to user profile
+## Future Enhancements
+- **Dark/Light Mode**: Implement a theme toggle that allows users to switch between dark and light modes.
+- **User Profile Page**: Add a dedicated page for users to view and edit their profiles.
+- **Enhanced Error Handling**: Improve error messages and feedback to users during operations like login and data submission.
+- **Improved Accessibility**: Ensure all components and pages are fully accessible to users with disabilities, following WCAG guidelines.
 
-## style (CSS file)
-- header
-- theme colour
-- different size
-- theme page
-- each page
+## Development Testing - Manual Testing
 
-## Development testing
+The application was manually tested during development to ensure all functionalities worked as intended. Below is an overview of the testing methods and results for each page.
 
-One of the first thing I made for this application was the routes. Once the routes was set, I tested to make sure it was working: 
+### Dashboard Page
+- **Basic Route**: Passed  
+  *Method*: Start the app and go to the local host to verify if the message is displayed correctly.
+  ![Dashboard Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard testing.png>)
+  
+- **API Route**: Passed  
+  *Method*: Start the app and go to the local host to check if data is being fetched and displayed correctly.
+  ![Dashboard API Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard API.png>)
 
-#### Dashboard Page
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard testing.png>)
+### Allocation Page
+- **Basic Route**: Passed  
+  *Method*: Go to the route (localhost:3000/allocation) and verify if the page loads correctly.
+  ![Allocation Page Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page Testing.png>)
+  
+- **Create Data**: Passed  
+  *Method*: Use Bruno to create data in the backend and verify if it appears on the front end.
+  ![Creating Data](<resources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/creating some data.png>)
+  
+- **Edit Data**: Passed  
+  *Method*: Edit existing data and check if the changes are reflected.
+  ![Edit Data](<resources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/edit.png>)
+  
+- **Delete Data**: Passed  
+  *Method*: Delete data and verify if it is removed from the list.
+  ![Delete Data](<resources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/delete.png>)
 
-Confirmed the data is coming through and links to other site is working
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Dashboard API.png>)
+### Asset Page
+- **Basic Route**: Passed  
+  *Method*: Go to the route (localhost:3000/asset) and verify if the page loads correctly.
+  ![Asset Page Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/Asset Page testing.png>)
+  
+- **API Route**: Passed  
+  *Method*: Use Bruno to create data in the backend and verify if it appears on the front end.
+  ![Asset API Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/Asset API tested.png>)
 
-#### Allocation Page
-Confirm page is working
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page Testing.png>)
+- **Button and Data Preview**: Passed  
+  *Method*: Verify that buttons and data preview correctly.
+  ![Preview Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/test to show it shows preview.png>)
 
-Creating some data to check the API on front end
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/creating some data.png>)
+- **New Asset Creation**: Passed  
+  *Method*: Create a new asset and verify if it is added to the list.
+  ![New Asset Created](<resources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/new asset.png>)
 
-Confirm data is coming through
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/confrim it is working.png>)
+### Client Page
+- **Basic Route**: Passed  
+  *Method*: Go to the route and verify if the page loads correctly.
+  ![Client Page Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/client page/client page testing.png>)
+  
+- **CRUD Operations**: Passed  
+  *Method*: Verify that create, read, update, and delete operations work as expected.
+  ![Client CRUD Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/client page/client page.png>)
+  
+- **Add Client**: Passed  
+  *Method*: Add a new client and verify if it is added to the list.
+  ![Add Client](<resources/T3A2/PartB/Development Testing/frontend/route testing/client page/adding new client.png>)
+  
+- **Edit Client**: Passed  
+  *Method*: Edit a client and verify if the changes are reflected.
+  ![Edit Client](<resources/T3A2/PartB/Development Testing/frontend/route testing/client page/editing client.png>)
+  
+- **Delete Client**: Passed  
+  *Method*: Delete a client and verify if it is removed from the list.
+  ![Delete Client](<resources/T3A2/PartB/Development Testing/frontend/route testing/client page/deleting client.png>)
 
-Data can be edited
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/edit.png>)
+### Operator Page
+- **Basic Route**: Passed  
+  *Method*: Go to the route and verify if the page loads correctly.
+  ![Operator Page Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/Opeartor page testing.png>)
+  
+- **CRUD Operations**: Passed  
+  *Method*: Verify that create, read, update, and delete operations work as expected.
+  ![Operator CRUD Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/Operator Page.png>)
+  
+- **Add Operator**: Passed  
+  *Method*: Add a new operator and verify if it is added to the list.
+  ![Add Operator](<resources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/New operator.png>)
+  
+- **Edit Operator**: Passed  
+  *Method*: Edit an operator and verify if the changes are reflected.
+  ![Edit Operator](<resources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/edit operator.png>)
+  
+- **Delete Operator**: Passed  
+  *Method*: Delete an operator and verify if it is removed from the list.
+  ![Delete Operator](<resources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/delete operator.png>)
 
-Can be deleted
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Allocation Page/delete.png>)
+### User Page
+- **Basic Route**: Passed  
+  *Method*: Go to the route and verify if the page loads correctly.
+  ![User Page Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/userPage/User Page Testing.png>)
+  
+- **CRUD Operations**: Passed  
+  *Method*: Verify that create, read, update, and delete operations work as expected.
+  ![User CRUD Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/userPage/User API.png>)
+  
+- **Edit User**: Passed  
+  *Method*: Edit a user and verify if the changes are reflected.
+  ![Edit User](<resources/T3A2/PartB/Development Testing/frontend/route testing/userPage/edit user API.png>)
+  
+- **Delete User**: Passed  
+  *Method*: Delete a user and verify if it is removed from the list.
+  ![Delete User](<resources/T3A2/PartB/Development Testing/frontend/route testing/userPage/Screenshot 2024-08-09 at 9.31.14 AM.png>)
 
-#### Asset Page
-Confirming route made
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Asset Page testing.png>)
+### Login/Signup Page
+- **Basic Route**: Passed  
+  *Method*: Go to the route and verify if the page loads correctly.
+  ![Login Page Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/Login Page testing.png>)
+  
+- **Protected Route**: Passed  
+  *Method*: Attempt to access a protected route without logging in and verify if it redirects to the login/signup page.
+  ![Protected Route Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/Login:singup page with options for both.png>)
+  
+- **JWT Handling Issue**: Failed initially due to missing CORS implementation, resolved after adding CORS.
+  ![JWT Handling Issue](<resources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/failed signup.png>) 
+  ![JWT Handling Fixed](<resources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/USer logged in.png>)
 
-Tested to confirm that the backend server was working and asset could be created
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/Asset API tested.png>)
+### Hosting
+- **URL Working**: Passed  
+  *Method*: Verify that the deployed site is accessible via the custom domain.
+  ![URL Working](<resources/T3A2/PartB/Development Testing/frontend/route testing/Hosting working.png>)
+  
+- **DNS Redirection**: Initially failed but resolved after waiting for DNS propagation.
+  ![DNS Redirection](<resources/T3A2/PartB/Development Testing/frontend/route testing/URL working.png>)
+  ![URL Working Final](<resources/T3A2/PartB/Development Testing/frontend/route testing/URL check whiteboardscheuler.com.png>)
 
-Confirmed that API was being called and could see the asset created directly to backend
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/asset page with an asset created.png>) 
+### UI/UX Testing
+- **Color Consistency**: Passed  
+  *Method*: Verify that the selected colors are applied consistently across the site.
+  ![Color Testing](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/Colour.png>)
+  
+- **Navbar Color Change**: Passed  
+  *Method*: Navigate through different pages and verify that the navbar color changes according to the active route.
+  ![Navbar Color Change](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/mobile user/Asset Page.png>)
+  
+- **Logo Link**: Passed  
+  *Method*: Click on the logo and verify if it navigates back to the dashboard.
+  ![Logo Link](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/mobile user/Asset Page.png>)
 
+- **Icon Visibility**: Passed  
+  *Method*: Verify that the GitHub and LinkedIn icons are visible and functional.
+  ![GitHub and LinkedIn Icons](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/Git hub and Linkedin ICON.png>)
+  
+- **Link Functionality**: Passed  
+  *Method*: Click on the icons and verify if they redirect to the correct profiles.
+  ![GitHub Link](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/Git HUB.png>)
+  ![LinkedIn Link](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/Linkedin.png>)
 
-Having issues with creating asset
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/issues with Allocation.png>)
+### Mobile Responsiveness
+- **Login/Signup Page**: Passed  
+  *Method*: Use inspect mode to simulate a smaller screen and verify that the layout adjusts correctly.
+  ![Login/Signup Mobile](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/mobile user/signup:login page.png>)
+  
+- **Dashboard Page**: Passed  
+  *Method*: Use inspect mode to simulate a smaller screen and verify that the layout adjusts correctly.
+  ![Dashboard Mobile](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/mobile user/dashboard page.png>)
+  
+- **Scrolling within the Box**: Passed  
+  *Method*: Verify that scrolling works correctly within content boxes.
+  ![Scrolling Box](<resources/T3A2/PartB/Development Testing/frontend/route testing/UI testubg/mobile user/scrolling within the box.png>)
 
-Round two testing after changing a bit of backend on what data it sent and frontend 
+## Additional Development Testing Recommendations
+To achieve 90% test coverage, consider the following additional testing:
 
-Created buttons for the asset type and license type based off the database information 
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/AssetAPI.png>)
+- **Unit Testing**: Implement unit tests for individual components using a testing framework like Jest.
+- **Integration Testing**: Test the interaction between different components and the backend API.
+- **End-to-End Testing**: Use a tool like Cypress to simulate user interactions and test the entire workflow from login to CRUD operations.
+- **Error Handling Testing**: Verify that appropriate error messages are displayed for different types of failures, such as network errors or invalid inputs.
+- **Cross-Browser Testing**: Ensure the application works consistently across different browsers (e.g., Chrome, Firefox, Safari).
 
-I was attempting to write the new information but it would not show up on the screen
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/failed  doenst show what I am typing.png>)
-
-Round 3 
-It previews correctly 
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/test to show it shows preview.png>)
-
-New asset created
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/AssetPage/round2/new asset.png>)
-
-
-#### Client Page
-Test to see the route is working
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page testing.png>)
-
-Testing Client API and CRUD function working
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/client page.png>)
-
-Adding new client
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/adding new client.png>)
-
-Deleting client
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/deleting client.png>)
-
-Editing client
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/client page/editing client.png>)
-
-#### Operator Page
-Route for Operator Page
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/Opeartor page testing.png>)
-
-API called for Operator Page
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/Operator Page.png>)
-
-Function for new operator
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/New operator.png>)
-
-Edit operator
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/edit operator.png>)
-
-Delete Operator
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/OperatorPage/delete operator.png>)
-
-
-#### User Page
-Route for user page
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/userPage/User Page Testing.png>)
-
-Testing user API
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/userPage/User API.png>)
-
-editing user
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/userPage/edit user API.png>)
-
-Deleting user
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/userPage/Screenshot 2024-08-09 at 9.31.14 AM.png>)
-
-#### Login Page/Signup page
-Basic Route created
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page testing.png>)
-
-
-Protected route created, and if there isn't a valid JWT user is sent to that page to login or sign up. 
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/Login:singup page with options for both.png>)
-
-However, first round of code, wouldn't let the user login or sign up
-
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/failed signup.png>) 
-
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/failed login.png>)
-
-or when new user were signed up they would sign up  but no JWT token was being sent back. I could confirm that new user was being created on the backend 
-
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/backend API call.png>)
-
-After few rounds of code adjustment, login/sign up function is working:
-
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/USer logged in.png>)
-
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/new user sign up 1.png>)
-
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Login Page/Screenshot 2024-08-10 at 10.26.26 AM.png>)
-
-### Hosting 
-Checked URL is working and website is working
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/Hosting working.png>)
-
-### URL for website
-whiteboardscheduler.com 
-
-I had this URL and after deploying had to redirect the DNS to make this work. It isn't working but need to come back to make sure it is working
-![alt text](<rsources/T3A2/PartB/Development Testing/frontend/route testing/URL working.png>)
-
+This enhanced testing strategy will help ensure that all aspects of the application function as expected and provide a better user experience.

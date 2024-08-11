@@ -28,7 +28,7 @@
     align-items: center;
     margin-bottom: 10px;
     line-height: 1.5;
-    flex-wrap: wrap; /* Ensure items wrap properly */
+    flex-wrap: wrap; 
 }
 
 .operator-actions {
